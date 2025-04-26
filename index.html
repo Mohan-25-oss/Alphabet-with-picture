@@ -1,29 +1,29 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Alphabet with Pictures (English & Bengali)</title>
-    <style>
-        body {
+<!-- START FROM HERE  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Alphabet with Pictures (English & Bengali)</title>
+<style>
+    body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         min-height: 100vh;
         margin: 0;
         padding: 20px;
         transition: background-color 0.5s ease;
-        }
-        
-        .button-container {
+    }
+
+    .button-container {
         display: flex;
         flex-wrap: wrap;
         gap: 15px;
         margin: 30px auto;
         justify-content: center;
         max-width: 900px;
-        }
-        
-        .color-button {
+    }
+    .color-button {
         padding: 20px;
         width: 60px;
         height: 60px;
@@ -38,14 +38,14 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        }
-        
-        .color-button:hover {
+    }
+
+    .color-button:hover {
         transform: scale(1.1) rotate(10deg);
         box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.4);
-        }
-        
-        .display-container {
+    }
+
+    .display-container {
         background-color: rgba(255, 255, 255, 0.9);
         border-radius: 20px;
         padding: 30px;
@@ -53,23 +53,23 @@
         max-width: 800px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         text-align: center;
-        }
-        
-        #displayLetter {
+    }
+
+    #displayLetter {
         font-size: 80px;
         color: #333;
         margin-bottom: 10px;
         font-weight: bold;
-        }
-        
-        #displayMeaning {
+    }
+
+    #displayMeaning {
         font-size: 28px;
         color: #444;
         margin: 20px 0;
         line-height: 1.5;
-        }
-        
-        #image {
+    }
+
+    #image {
         display: block;
         margin: 30px auto;
         width: 250px;
@@ -78,241 +78,226 @@
         border-radius: 15px;
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         border: 5px solid white;
-        }
-        
-        .bengali-text {
+    }
+
+    .bengali-text {
         font-family: 'SolaimanLipi', 'Bangla', Arial, sans-serif;
         color: #d35400;
         font-weight: bold;
-        }
-        
-        .title {
+    }
+
+    .title {
         text-align: center;
         color: #2c3e50;
         font-size: 36px;
         margin-top: 20px;
-        }
-        
-        .subtitle {
+    }
+
+    .subtitle {
         text-align: center;
         color: #7f8c8d;
         font-size: 18px;
         margin-bottom: 30px;
+    }
+
+    /* Bottom Buttons */
+    .bottom-buttons {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 20px;
+    }
+
+    .bottom-buttons button {
+        background-color: #3498db;
+        color: white;
+        padding: 15px 25px;
+        font-size: 20px;
+        border: none;
+        border-radius: 50px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .bottom-buttons button:hover {
+        background-color: #2980b9;
+        transform: scale(1.05);
+    }
+
+    /* Animation for buttons */
+    .color-button {
+        animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
         }
-    </style>
-    </head>
-    <body>
-    <h1 class="title">English Alphabet Learning</h1>
-    <p class="subtitle">Click on letters to see pictures and Bengali meanings</p>
-
-    <!-- Button Container -->
-    <div class="button-container" id="buttons"></div>
-
-    <!-- Display Area -->
-    <div class="display-container">
-        <div id="displayLetter"></div>
-        <div id="displayMeaning"></div>
-        <img id="image" src="" alt="Letter Image" style="display: none;"/>
-    </div>
-
-    <script>
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const colors = [
-        "#e74c3c", "#2ecc71", "#3498db", "#e67e22", "#9b59b6", "#e84393", 
-        "#a0522d", "#16a085", "#34495e", "#c0392b", "#7f8c8d", "#f1c40f",
-        "#27ae60", "#2980b9", "#d35400", "#8e44ad", "#f39c12", "#1abc9c",
-        "#2c3e50", "#e74c3c", "#e67e22", "#d35400", "#f39c12", "#1abc9c",
-        "#2c3e50", "#e74c3c"
-        ];
-
-        const meanings = {
-        A: { 
-            text: "A for Apple", 
-            bengali: "এ ফর অ্যাপল", 
-            img: "https://images.pexels.com/photos/28856348/pexels-photo-28856348/free-photo-of-vibrant-red-apples-arranged-in-a-pile.jpeg?auto=compress&cs=tinysrgb&w=600" 
-        },
-        B: { 
-            text: "B for Ball", 
-            bengali: "বি ফর বল", 
-            img: "https://m.media-amazon.com/images/I/61AiR8UKDIL._AC_UF894,1000_QL80_.jpg" 
-        },
-        C: { 
-            text: "C for Cat", 
-            bengali: "সি ফর ক্যাট", 
-            img: "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.jpg" 
-        },
-        D: { 
-            text: "D for Dog", 
-            bengali: "ডি ফর ডগ", 
-            img: "https://pbs.twimg.com/media/CRtKnVEVEAA01ST?format=jpg&name=4096x4096" 
-        },
-        E: { 
-            text: "E for Elephant", 
-            bengali: "ই ফর এলিফেন্ট", 
-            img: "https://sustainabletravel.org/wp-content/uploads/Blog-Image-Elephants-Together-1200x675-1.jpg" 
-        },
-        F: { 
-            text: "F for Flower", 
-            bengali: "এফ ফর ফ্লাওয়ার", 
-            img: "https://cdn.pixabay.com/photo/2018/01/29/07/11/flower-3115353_1280.jpg" 
-        },
-        G: { 
-            text: "G for Giraffe", 
-            bengali: "জি ফর জিরাফ", 
-            img: "https://d1jyxxz9imt9yb.cloudfront.net/animal/112/meta_image/regular/WR202206_GiraffeTranslocation_012_360559_reduced.jpg" 
-        },
-        H: { 
-            text: "H for House", 
-            bengali: "এইচ ফর হাউস", 
-            img: "https://town-n-country-living.com/wp-content/uploads/2023/06/craftsman-exterior.jpg" 
-        },
-        I: { 
-            text: "I for Ice Cream", 
-            bengali: "আই ফর আইসক্রিম", 
-            img: "https://becs-table.com.au/wp-content/uploads/2014/01/ice-cream-1.jpg" 
-        },
-        J: { 
-            text: "J for Jackfruit", 
-            bengali: "জে ফর কাঁঠাল", 
-            img: "https://cdn.shopify.com/s/files/1/0858/1205/2304/files/Get_to_know_Jackfruit1.jpg?v=1726610189" 
-        },
-        K: { 
-            text: "K for Kite", 
-            bengali: "কে ফর ঘুড়ি", 
-            img: "https://holidaytoday.org/wp-content/uploads/2024/02/National-Kite-Flying-Day-450x500.png" 
-        },
-        L: { 
-            text: "L for Lion", 
-            bengali: "এল ফর লায়ন", 
-            img: "https://safariavventura.com/wp-content/uploads/2018/02/leone-africano-2.jpg" 
-        },
-        M: { 
-            text: "M for Mango", 
-            bengali: "এম ফর আম", 
-            img: "https://www.thegardener.co.za/wp-content/uploads/2022/02/shutterstock_646447264-scaled.jpg" 
-        },
-        N: { 
-            text: "N for Nest", 
-            bengali: "এন ফর নেস্ট", 
-            img: "https://images.birdfact.com/production/crow-sat-on-nest.jpg?w=1200&h=900&q=80&auto=format&fit=crop&dm=1647295253&s=64790bc7377da11993c2f9ecbc3f5949" 
-        },
-        O: { 
-            text: "O for Orange", 
-            bengali: "ও ফর অরেঞ্জ", 
-            img: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995056_1280.jpg" 
-        },
-        P: { 
-            text: "P for Parrot", 
-            bengali: "পি ফর প্যারট", 
-            img: "https://cdn.pixabay.com/photo/2018/08/12/16/59/parrot-3601194_1280.jpg" 
-        },
-        Q: { 
-            text: "Q for Queen", 
-            bengali: "কিউ ফর কুইন", 
-            img: "https://images.immediate.co.uk/production/volatile/sites/7/2019/11/AM9WYT-2-fe5d36f.jpg" 
-        },
-        R: { 
-            text: "R for Rose", 
-            bengali: "আর ফর রোজ", 
-            img: "https://cdn.pixabay.com/photo/2018/01/29/07/11/flower-3115353_1280.jpg" 
-        },
-        S: { 
-            text: "S for Sun", 
-            bengali: "এস ফর সান", 
-            img: "https://plus.unsplash.com/premium_photo-1670210080045-a2e0da63dd99?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dGhlJTIwc3VufGVufDB8fDB8fHww" 
-        },
-        T: { 
-            text: "T for Tiger", 
-            bengali: "টি ফর টাইগার", 
-            img: "https://media.istockphoto.com/id/1420676204/photo/portrait-of-a-royal-bengal-tiger-alert-and-staring-at-the-camera-national-animal-of-bangladesh.jpg?s=612x612&w=0&k=20&c=0OCYv99Ktv3fJ-YYlg7SetHBJj3pIk58WY7GDy5VCtI=" 
-        },
-        U: { 
-            text: "U for Umbrella", 
-            bengali: "ইউ ফর আমব্রেলা", 
-            img: "https://i.pinimg.com/736x/ef/80/1d/ef801dafc7ce2d8a3b1a2ed7a3db8b8a.jpg" 
-        },
-        V: { 
-            text: "V for Van", 
-            bengali: "ভি ফর ভ্যান", 
-            img: "https://www.hlj.com/productthumbs/tmt/tmt22181_1.jpg?v=" 
-        },
-        W: { 
-            text: "W for Watermelon", 
-            bengali: "ডব্লিউ ফর ওয়াটারমেলন", 
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhTn9mIiFqW_tqIhD1fi5nLBV--vF1fGLrEQ&s" 
-        },
-        X: { 
-            text: "X for Xmas Tree", 
-            bengali: "এক্স ফর ক্রিসমাস ট্রি", 
-            img: "https://img.freepik.com/free-vector/vintage-christmas-tree-with-gifts_23-2148759404.jpg?t=st=1745676345~exp=1745679945~hmac=8feb3b30c02cf6606fd9f6c5a75e9de567ed0b003477cac265fba82f0440e66d&w=740" 
-        },
-        Y: { 
-            text: "Y for Yak", 
-            bengali: "ওয়াই ফর ইয়গা", 
-            img: "https://mapmygenome.in/cdn/shop/articles/The_Benefits_of_Yoga_for_Mind_and_Body_-_Enhancing_Health_and_Wellness.webp?v=1718860676" 
-        },
-        Z: { 
-            text: "Z for Zebra", 
-            bengali: "জেড ফর জেব্রা", 
-            img: "https://www.treehugger.com/thmb/qFhPReYPPaVgTtHBOthYeMJVeZ0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1043597638-49acd69677d7442588c1d8930d298a59.jpg" 
+        40% {
+            transform: translateY(-10px);
         }
-        };
-
-        const buttonsContainer = document.getElementById("buttons");
-        const displayLetter = document.getElementById("displayLetter");
-        const displayMeaning = document.getElementById("displayMeaning");
-        const image = document.getElementById("image");
-
-        // Create buttons for each letter
-        for (let i = 0; i < letters.length; i++) {
-        const letter = letters[i];
-        const button = document.createElement("button");
-        button.innerText = letter;
-        button.className = "color-button";
-        button.style.backgroundColor = colors[i];
-        
-        button.onclick = function() {
-            // Change background color with gradient
-            document.body.style.background = `linear-gradient(135deg, ${colors[i]} 0%, ${darkenColor(colors[i], 20)} 100%)`;
-            
-            // Display the letter
-            displayLetter.innerText = letter;
-            
-            // Display meaning in English and Bengali
-            if (meanings[letter]) {
-            displayMeaning.innerHTML = `
-                <div>${meanings[letter].text}</div>
-                <div class="bengali-text">${meanings[letter].bengali}</div>
-            `;
-            image.src = meanings[letter].img;
-            image.style.display = "block";
-            } else {
-            displayMeaning.innerHTML = `
-                <div>Information not available</div>
-                <div class="bengali-text">তথ্য পাওয়া যায়নি</div>
-            `;
-            image.style.display = "none";
-            }
-        };
-        
-        buttonsContainer.appendChild(button);
+        60% {
+            transform: translateY(-5px);
         }
+    }
 
-        // Helper function to darken colors
-        function darkenColor(color, percent) {
-        const num = parseInt(color.replace("#", ""), 16);
-        const amt = Math.round(2.55 * percent);
-        const R = (num >> 16) - amt;
-        const G = (num >> 8 & 0x00FF) - amt;
-        const B = (num & 0x0000FF) - amt;
-        return "#" + (
-            0x1000000 +
-            (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
-            (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
-            (B < 255 ? B < 1 ? 0 : B : 255)
-        ).toString(16).slice(1);
-        }
+</style>
+</head>
 
-        // Initialize with first letter
-        document.querySelector(".color-button").click();
-    </script>
+<body>
+
+<h1 class="title">English Alphabet Learning</h1>
+<p class="subtitle">Click on letters or slide left/right to see pictures and Bengali meanings</p>
+
+<!-- Slide Buttons -->
+<div class="bottom-buttons">
+    <button id="prevBtn">⬅️ বামদিকে</button>
+    <button id="nextBtn">ডানদিকে ➡️</button>
+</div>
+
+<!-- Button Container -->
+<div class="button-container" id="buttons"></div>
+
+<!-- Display Area -->
+<div class="display-container">
+    <div id="displayLetter"></div>
+    <div id="displayMeaning"></div>
+    <img id="image" src="" alt="Letter Image" style="display: none;"/>
+</div>
+
+<script>
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const colors = [
+    "#e74c3c", "#2ecc71", "#3498db", "#e67e22", "#9b59b6", "#e84393", 
+    "#a0522d", "#16a085", "#34495e", "#c0392b", "#7f8c8d", "#f1c40f",
+    "#27ae60", "#2980b9", "#d35400", "#8e44ad", "#f39c12", "#1abc9c",
+    "#2c3e50", "#e74c3c", "#e67e22", "#d35400", "#f39c12", "#1abc9c",
+    "#2c3e50", "#e74c3c"
+];
+
+// Meanings for A to Z
+const meanings = {
+    A: { text: "A for Apple", bengali: "এ ফর অ্যাপল", img: "https://images.pexels.com/photos/28856348/pexels-photo-28856348/free-photo-of-vibrant-red-apples-arranged-in-a-pile.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    B: { text: "B for Ball", bengali: "বি ফর বল", img: "https://m.media-amazon.com/images/I/61AiR8UKDIL._AC_UF894,1000_QL80_.jpg" },
+    // Add more letters similarly from A to Z with their meanings and images
+    C: { text: "C for Cat", bengali: "সি ফর ক্যাট", img: "https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.jpg" },
+    D: { text: "D for Dog", bengali: "ডি ফর ডগ", img: "https://pbs.twimg.com/media/CRtKnVEVEAA01ST?format=jpg&name=4096x4096" },
+    E: { text: "E for Elephant", bengali: "ই ফর এলিফেন্ট", img: "https://sustainabletravel.org/wp-content/uploads/Blog-Image-Elephants-Together-1200x675-1.jpg" },
+    F: { text: "F for Flower", bengali: "এফ ফর ফ্লাওয়ার", img: "https://cdn.pixabay.com/photo/2018/01/29/07/11/flower-3115353_1280.jpg" },
+    G: { text: "G for Giraffe", bengali: "জি ফর জিরাফ", img: "https://d1jyxxz9imt9yb.cloudfront.net/animal/112/meta_image/regular/WR202206_GiraffeTranslocation_012_360559_reduced.jpg" },
+    H: { text: "H for House", bengali: "এইচ ফর হাউস", img: "https://town-n-country-living.com/wp-content/uploads/2023/06/craftsman-exterior.jpg" },
+    I: { text: "I for Ice Cream", bengali: "আই ফর আইসক্রিম", img: "https://becs-table.com.au/wp-content/uploads/2014/01/ice-cream-1.jpg" },
+    J: { text: "J for Jackfruit", bengali: "জে ফর কাঁঠাল", img: "https://cdn.shopify.com/s/files/1/0858/1205/2304/files/Get_to_know_Jackfruit1.jpg?v=1726610189" },
+    K: { text: "K for Kite", bengali: "কে ফর ঘুড়ি", img: "https://holidaytoday.org/wp-content/uploads/2024/02/National-Kite-Flying-Day-450x500.png" },
+    L: { text: "L for Lion", bengali: "এল ফর লায়ন", img: "https://safariavventura.com/wp-content/uploads/2018/02/leone-africano-2.jpg" },
+    M: { text: "M for Mango", bengali: "এম ফর আম", img: "https://www.thegardener.co.za/wp-content/uploads/2022/02/shutterstock_646447264-scaled.jpg" },
+    N: { text: "N for Nest", bengali: "এন ফর নেস্ট", img: "https://images.birdfact.com/production/crow-sat-on-nest.jpg?w=1200&h=900&q=80&auto=format&fit=crop&dm=1647295253&s=64790bc7377da11993c2f9ecbc3f5949" },
+    O: { text: "O for Orange", bengali: "ও ফর অরেঞ্জ", img: "https://cdn.pixabay.com/photo/2017/01/20/15/06/oranges-1995056_1280.jpg" },
+    P: { text: "P for Parrot", bengali: "পি ফর প্যারট", img: "https://cdn.pixabay.com/photo/2018/08/12/16/59/parrot-3601194_1280.jpg" },
+    Q: { text: "Q for Queen", bengali: "কিউ ফর কুইন", img: "https://images.immediate.co.uk/production/volatile/sites/7/2019/11/AM9WYT-2-fe5d36f.jpg" },
+    R: { text: "R for Rose", bengali: "আর ফর রোজ", img: "https://cdn.pixabay.com/photo/2018/01/29/07/11/flower-3115353_1280.jpg" },
+    S: { text: "S for Sun", bengali: "এস ফর সান", img: "https://plus.unsplash.com/premium_photo-1670210080045-a2e0da63dd99?fm=jpg&q=60&w=3000" },
+    T: { text: "T for Tiger", bengali: "টি ফর টাইগার", img: "https://media.istockphoto.com/id/1420676204/photo/portrait-of-a-royal-bengal-tiger-alert-and-staring-at-the-camera-national-animal-of-bangladesh.jpg" },
+    U: { text: "U for Umbrella", bengali: "ইউ ফর আমব্রেলা", img: "https://i.pinimg.com/736x/ef/80/1d/ef801dafc7ce2d8a3b1a2ed7a3db8b8a.jpg" },
+    V: { text: "V for Van", bengali: "ভি ফর ভ্যান", img: "https://www.hlj.com/productthumbs/tmt/tmt22181_1.jpg?v=" },
+    W: { text: "W for Watermelon", bengali: "ডব্লিউ ফর ওয়াটারমেলন", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhTn9mIiFqW_tqIhD1fi5nLBV--vF1fGLrEQ&s" },
+    X: { text: "X for Xmas Tree", bengali: "এক্স ফর ক্রিসমাস ট্রি", img: "https://img.freepik.com/free-vector/vintage-christmas-tree-with-gifts_23-2148759404.jpg" },
+    Y: { text: "Y for Yak", bengali: "ওয়াই ফর ইয়াক", img: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Yak_at_a_camp.jpg" },
+    Z: { text: "Z for Zebra", bengali: "জেড ফর জেব্রা", img: "https://www.treehugger.com/thmb/qFhPReYPPaVgTtHBOthYeMJVeZ0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1043597638-49acd69677d7442588c1d8930d298a59.jpg" }
+};
+
+const buttonsContainer = document.getElementById("buttons");
+const displayLetter = document.getElementById("displayLetter");
+const displayMeaning = document.getElementById("displayMeaning");
+const image = document.getElementById("image");
+
+// Current index
+let currentIndex = 0;
+
+// Show letter function
+function showLetter(index) {
+    const letter = letters[index];
+    const color = colors[index];
+
+    document.body.style.background = `linear-gradient(135deg, ${color} 0%, ${darkenColor(color, 20)} 100%)`;
+    displayLetter.innerText = letter;
+
+    if (meanings[letter]) {
+        displayMeaning.innerHTML = `
+            <div>${meanings[letter].text}</div>
+            <div class="bengali-text">${meanings[letter].bengali}</div>
+        `;
+        image.src = meanings[letter].img;
+        image.style.display = "block";
+    } else {
+        displayMeaning.innerHTML = `
+            <div>Information not available</div>
+            <div class="bengali-text">তথ্য পাওয়া যায়নি</div>
+        `;
+        image.style.display = "none";
+    }
+}
+
+// Left Button
+document.getElementById("prevBtn").onclick = function() {
+    currentIndex = (currentIndex - 1 + letters.length) % letters.length;
+    showLetter(currentIndex);
+    vibrate(); // Vibrate effect
+};
+
+// Right Button
+document.getElementById("nextBtn").onclick = function() {
+    currentIndex = (currentIndex + 1) % letters.length;
+    showLetter(currentIndex);
+    vibrate(); // Vibrate effect
+};
+
+// Create Buttons for each letter
+for (let i = 0; i < letters.length; i++) {
+    const letter = letters[i];
+    const button = document.createElement("button");
+    button.innerText = letter;
+    button.className = "color-button";
+    button.style.backgroundColor = colors[i];
+
+    button.onclick = function() {
+        currentIndex = i;
+        showLetter(currentIndex);
+        vibrate(); // Vibrate effect
+    };
+
+    buttonsContainer.appendChild(button);
+}
+
+// Helper Function to darken color
+function darkenColor(color, percent) {
+    const num = parseInt(color.replace("#", ""), 16);
+    const amt = Math.round(2.55 * percent);
+    const R = (num >> 16) - amt;
+    const G = (num >> 8 & 0x00FF) - amt;
+    const B = (num & 0x0000FF) - amt;
+    return "#" + (
+        0x1000000 +
+        (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+        (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+        (B < 255 ? B < 1 ? 0 : B : 255)
+    ).toString(16).slice(1);
+}
+
+// Vibration effect for mobile devices
+function vibrate() {
+    if (navigator.vibrate) {
+        navigator.vibrate(100); // Vibrate for 100ms
+    }
+}
+
+// First show A
+showLetter(currentIndex);
+</script>
+
+</body>
+</html>
+
